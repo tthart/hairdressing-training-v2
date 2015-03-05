@@ -1,0 +1,97 @@
+<widget xmlns       = "http://www.w3.org/ns/widgets"
+    xmlns:gap       = "http://phonegap.com/ns/1.0"
+    xmlns:android   = "http://schemas.android.com/apk/res/android"
+    id              = "com.jisc.hairdressing"
+    version         = "1.0">
+
+<access origin="*" browserOnly="true"/>
+    <name>Hairdressing Training</name>
+
+    <description>
+      This app has been developed to allow teachers; students; trainers or anyone with an interest in hairdressing and barbering skills access to step-by-step training videos on the move ­ all mapped to the NVQ curriculum. The video content has been produced by FE colleges to ensure accuracy. It has been developed by mimas.ac.uk, funded by jisc.ac.uk.
+    </description>
+
+    <author href="https://hairdressing.ac.uk" email="tom.hart@manchester.ac.uk">
+      Tom Hart
+    </author>
+<gap:splash src="splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" width="320" height="426" /> <gap:splash src="splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" width="320" height="470" /> <gap:splash src="splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" width="480" height="640" /> <gap:splash src="splash/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" width="720" height="960" />
+
+<gap:splash src="splash/apple/screen-iphone-portrait.png" gap:platform="ios" width="320" height="480" />
+<gap:splash src="splash/apple/screen-iphone-portrait-2x.png" gap:platform="ios" width="640" height="960" />
+<gap:splash src="splash/apple/screen-ipad-portrait.png" gap:platform="ios" width="768" height="1024" />
+<gap:splash src="splash/apple/screen-ipad-landscape.png" gap:platform="ios" width="1024" height="768" />
+<gap:splash src="splash/apple/default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
+
+<icon src="icon.png" />
+<icon src="36.png" gap:platform="android" gap:qualifier="ldpi" />
+<icon src="48.png" gap:platform="android" gap:qualifier="mdpi" />
+<icon src="72.png" gap:platform="android" gap:qualifier="hdpi" />
+<icon src="96.png" gap:platform="android" gap:qualifier="xhdpi" />
+<icon src="144.png" gap:platform="android" gap:qualifier="xxhdpi" />
+<icon src="192.png" gap:platform="android" gap:qualifier="fr-xxhdpi" />
+
+<icon src="icon.png" />
+<icon src="36.png" gap:platform="android" gap:qualifier="ldpi" />
+<icon src="48.png" gap:platform="android" gap:qualifier="mdpi" />
+<icon src="72.png" gap:platform="android" gap:qualifier="hdpi" />
+<icon src="96.png" gap:platform="android" gap:qualifier="xhdpi" />
+<icon src="144.png" gap:platform="android" gap:qualifier="xxhdpi" />
+<icon src="192.png" gap:platform="android" gap:qualifier="fr-xxhdpi" />
+
+<icon src="AppIcon60x60.png" gap:platform="ios" width="60" height="60" />
+<icon src="AppIcon60x60@2x.png" gap:platform="ios" width="120" height="120" />
+
+<!-- iPad -->
+<icon src="AppIcon76.png" gap:platform="ios" width="76" height="76" />
+<icon src="AppIcon76@2x.png" gap:platform="ios" width="152" height="152" />
+
+<!-- Settings Icon -->
+<icon src="AppIcon29x29.png" gap:platform="ios" width="29" height="29" />
+<icon src="AppIcon29x29@2x.png" gap:platform="ios" width="58" height="58" />
+
+<!-- Spotlight Icon -->
+<icon src="AppIcon40x40.png" gap:platform="ios" width="40" height="40" />
+<icon src="AppIcon40x40@2x.png" gap:platform="ios" width="80" height="80" />
+
+<!-- iPhone / iPod Touch -->
+<icon src="AppIcon57x57.png" gap:platform="ios" width="57" height="57" />
+<icon src="AppIcon57x57@2x.png" gap:platform="ios" width="114" height="114" />
+
+<!-- iPad -->
+<icon src="AppIcon72x72.png" gap:platform="ios" width="72" height="72" />
+<icon src="AppIcon72x72@2x.png" gap:platform="ios" width="144" height="144" />
+
+<!-- iPhone Spotlight and Settings Icon -->
+<icon src="AppIcon29x29.png" gap:platform="ios" width="29" height="29" />
+<icon src="AppIcon29x29@2x.png" gap:platform="ios" width="58" height="58" />
+
+<!-- iPad Spotlight and Settings Icon -->
+<icon src="AppIcon50x50.png" gap:platform="ios" width="50" height="50" />
+<icon src="AppIcon50x50@2x.png" gap:platform="ios" width="100" height="100" />
+
+
+<!-- We'll include the Barcode plugin as an example -->
+<gap:plugin name="org.apache.cordova.file" version="1.0.1" />
+<gap:plugin name="org.apache.cordova.SplashScreen" value="org.apache.cordova.SplashScreen"/>
+<gap:plugin name="nl.x-services.plugins.socialsharing" version="3.5" />
+<gap:plugin name="com.phonegap.plugin.statusbar" />
+<gap:plugin name="net.yoik.cordova.plugins.screenorientation" version="1.1.1" />
+<gap:plugin name="it.mobimentum.phonegapspinnerplugin" version="1.1.0" />
+<gap:plugin name="org.li8.inappbrowser" version="0.1" />
+<preference name="splash-screen-duration" value="50000" />
+<preference name="AndroidPersistentFileLocation" value="Internal" />
+<preference name="iosPersistentFileLocation" value="Library" />
+
+<gap:config-file platform="ios" parent="UIStatusBarHidden">
+    <true/>
+</gap:config-file>
+
+<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
+    <false/>
+</gap:config-file>
+<gap:config-file platform="ios" parent="CFBundleShortVersionString">
+<string>1.0</string>
+</gap:config-file>
+
+<preference name="target-device" value="handset" />
+</widget>

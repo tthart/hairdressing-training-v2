@@ -36,7 +36,7 @@
 
 
           document.addEventListener("DOMContentLoaded", getAllVideos(), false);
-		  
+		
 	
 	$.ui.slideSideMenu = false;
 
@@ -50,7 +50,12 @@
 <div id="afui" class="android">
 <div id="splashscreen" class='ui-loader'>
 <br><br>
-<span class='ui-icon ui-icon-loading spin'></span>
+<img src="48.png" /><br />
+<i class="fa fa-cog fa-spin" style="font-size:30pt;"></i><br />
+<p>Downloading list of videos</p>
+<small style="font-size:9pt;">This app requires an interenet connection</small>
+<br />
+
 </div>
 
      <ul id="meny">
@@ -77,22 +82,19 @@
                         <a href="#" onclick='if(meny.isOpen()){meny.close();}else{meny.open();};' class="fa fa-bars openmenu"></a>
             </header>
    <select id="categories" style="font-family:FontAwesome, 'Open Sans', Arial">
-   
-   <!--change to select (down arrow FA) -->
-  
-   <option value="all">Select a category &#xf107 </option>
-        <option value="barberingnvq2">Barbering [NVQ2] &#xf106 </option>
-        <option value="barberingnvq3">Barbering [NVQ3] &#xf106 </option>
-         <option value="hairnvq1">Hairdressing [NVQ1] &#xf106 </option>
-          <option value="hairnvq2">Hairdressing [NVQ2] &#xf106 </option>
-           <option value="hairnvq3">Hairdressing [NVQ3] &#xf106 </option>
-        <option value="stylingAndHairUp">Styling and Hair up &#xf106 </option>
-        <option value="salonManagement">Salon Management (All levels) &#xf106 </option>
-        <option value="shampooAndCondition">Shampooing and Conditioning &#xf106 </option>
-        <option value="cutting">Cutting &#xf106 </option>
-        <option value="colouring">Colouring &#xf106 </option>
-        <option value="perming">Perming &#xf106 </option>
-        <option value="consultation">Consultation &#xf106 </option>
+   <option value="all">Select a category</option>
+        <option value="barberingnvq2">Barbering [NVQ2]</option>
+        <option value="barberingnvq3">Barbering [NVQ3]</option>
+         <option value="hairnvq1">Hairdressing [NVQ1]</option>
+          <option value="hairnvq2">Hairdressing [NVQ2]</option>
+           <option value="hairnvq3">Hairdressing [NVQ3]</option>
+        <option value="stylingAndHairUp">Styling and Hair up</option>
+        <option value="salonManagement">Salon Management (All levels)</option>
+        <option value="shampooAndCondition">Shampooing and Conditioning</option>
+        <option value="cutting">Cutting</option>
+        <option value="colouring">Colouring</option>
+        <option value="perming">Perming</option>
+        <option value="consultation">Consultation</option>
 
     </select>
             <ul id="cont" data-refresh-ajax="true"></ul>

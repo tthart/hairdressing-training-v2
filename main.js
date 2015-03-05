@@ -148,9 +148,6 @@ function getPlaylist()
 
       var elem = $('span');
       var feedTitle = item.title.$t;
-      <!-- if(item.title.$t.length > 30)-->
-      <!--					var feedTitle = item.title.$t.substr(0, limit) + "<br />" + "Testtesttest";-->
-
       var feedURL = item.link[1].href;
       var fragments = feedURL.split("/");
       var videoID = fragments[fragments.length - 2];
@@ -237,7 +234,7 @@ if(result > -1) string += '<div class="nvq">NVQ Level 1</div>';
 	result = description.search("Lv3");
 	if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
 	result = description.search("/3");
-		if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
+	if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
 		 var shortened = "http://y2u.be/" + hash;
 			$.ui.updatePanel("#videoContainer",dataframe + '<div id="videoinformation">' +
       '<h2 id="' + e.id + '" class="currentvideo">' + data.data.title + '</h2>'+
@@ -247,8 +244,6 @@ if(result > -1) string += '<div class="nvq">NVQ Level 1</div>';
       'onclick="addVideoToPlaylist(\'' + hash + '\',\'' + data.data.title + '\');"><span class="fa fa-plus"> <span>playlist</span></button>' +
       '<button class="interact" onclick="window.plugins.socialsharing.share(\'' + shortened + '\',\'' + data.data.title + '\');"><span class="fa fa-share-alt"></span> share</button>');
 	  
-	//  onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')
-    //dataframe += "<p>Duration: " + length + "</p>";
   });
   
   $.ui.updatePanel('#videoContainer', dataframe);
@@ -414,7 +409,7 @@ function onDeviceReady()
 
 function getAllVideos() {
 
-  $.getJSON('http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&alt=json&max-results=50', function(data)
+$.getJSON('http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&alt=json&max-results=50',function(data)
   {
   
     $.each(data.feed.entry, function(i, item)
@@ -435,12 +430,27 @@ function getAllVideos() {
       {
      elements = elements + '<a class="videolink" href="#" onClick="getVideo(this,\'http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&alt=json&max-results=50\');" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
       }
-    });
+	  console.log(feedURL);
+	  console.log(elements);
+	 
+    }
+	
+	)
+	$.ui.updatePanel('#cont',elements);	
+			  window.setTimeout(function() {
+				   $.ui.launch();
+			  },200);
+	
   });
+	
+
+	
+	
+  
  
 
+/*
 
-  window.setTimeout(function () {
 $.getJSON('http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&alt=json&start-index=51&max-results=50', function(data)
   {
  
@@ -465,17 +475,14 @@ $.getJSON('http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&a
     });
 	
   });
+*/
 
-         
-        }, 2100);
+}
+     function getAllVideos2() {    
+        initVideos();
+		
+		
+			  
+  
+	 }
 
-             window.setTimeout(function () {
-           
-			  $.ui.updatePanel('#cont',elements);
-			  window.setTimeout(function() {
-				   $.ui.launch();
-			  },2000);
-        }, 2000);
-
-
-};

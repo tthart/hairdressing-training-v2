@@ -266,14 +266,7 @@ width:100%;
  border:none; 
 }
 
-#afui select {
-background-color:#000000;
-width:94%!important;
-margin-top:10px;
-border:1px solid #cf3651;
-color:#ffffff;	
 
-}
 
 .cont > .video:last-child > hr, .releatedvideos > .video:last-child > hr {
  margin-left:0px; 
@@ -362,13 +355,18 @@ font-size:14pt
 
 }
 
-#categories {
-width:98%!important;
-margin-left:10px!important;
-margin-right:10px!important;
-margin-bottom:10px;
-}
 
+#afui select {
+background-color:#000000;
+width:94%!important;
+margin-left:10px!important;
+margin-right:-10px;
+margin-bottom:10px;
+margin-top:10px;
+border:1px solid #cf3651;
+color:#ffffff;	
+
+}
 	
 	.video img {
 		
