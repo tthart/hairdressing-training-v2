@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hairdressing Training::Video Application</title>
+    
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=1.0" />
+   
+    <link rel="stylesheet" type="text/css" href="appframework/icons.css" />
+     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+     <link href='http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css" />
+    <link id="mobilestyle" rel="stylesheet" type="text/css" href="main.css" />
+
+    <script src="phonegap.js"></script>
+       <script type="text/javascript" charset="utf-8" src="appframework/appframework.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+     <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.css3animate.js"></script>
+       <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.popup.js"></script>
+       <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.touchEvents.js"></script>
+       <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.touchLayer.js"></script>
+<script type="text/javascript" src="appframework/meny.js"> </script>
+    <!--AppFramework plugin for sliding side menu-->
+    <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.slidemenu.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/jquery.sidr.min.js"></script>
+       <script type="text/javascript" src="main.js"> </script>
+    <script>   
+        $.ui.autoLaunch = false;
+		var elements = '';
+		var allVideos = 'http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&alt=json&max-results=50';
+		var videoList = "#cont";
+		  var list_data = "";
+        $.ui.animateHeaders = false;
+               //  var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
+ var videoURL = 'http://www.youtube.com/watch?v=';
+
+
+          document.addEventListener("DOMContentLoaded", getAllVideos(), false);
+		  
+	
+	$.ui.slideSideMenu = false;
+
+   
+		</script>
+        
+
+
+</head>
+<body> 
+<div id="afui" class="android">
+<div id="splashscreen" class='ui-loader'>
+<br><br>
+<span class='ui-icon ui-icon-loading spin'></span>
+</div>
+
+     <ul id="meny">
+              <li><a data-transition="fade" onClick="meny.close();" href="#main"  ><span class="fa fa-home"></span> Home</a></li>
+              <li><a data-transition="fade" onClick="meny.close();onDeviceReady();" href="#playlist"  ><span class="fa fa-thumb-tack"></span> My Playlist</a></li>
+              <li class="divider"></li>
+              <li><a data-transition="fade" onClick="meny.close();"  href="#about"  ><span class="fa fa-info-circle"></span> About</a></li>
+              <li><a data-transition="fade" onClick="meny.close();"  href="#help"  ><span class="fa fa-question-circle"></span> Help</a></li>
+              <li><a data-transition="fade" onClick="meny.close();" href="#copyright"  ><span class="fa fa-unlock"></span> Copyright</a></li>
+  <li><a onClick="var ref = window.open('http://htmob.mobi/', '_blank', 'location=yes');ref.show();" href="#main"  ><span class="fa fa-mail-forward"></span> Main site</a></li>
+ <li class="divider"></li>
+      <li><a onClick="changeCSS();" href="#"><span class="ionicons ion-arrow-swap"></span> Switch colours</a></li>
+        </ul>
+
+    <!--Left Side Menu Navigation bar -->
+   
+    <div id="content" style=""> 
+       
+    <!--Main View Pages-->
+        <div class="panel" title="Home" id="main" data-footer="none" selected="true"  >
+            <header>
+          
+                       <h1>Hairdressing Training</h1>
+                        <a href="#" onclick='if(meny.isOpen()){meny.close();}else{meny.open();};' class="fa fa-bars openmenu"></a>
+            </header>
+   <select id="categories" style="font-family:FontAwesome, 'Open Sans', Arial">
+   
+   <!--change to select (down arrow FA) -->
+  
+   <option value="all">Select a category &#xf107 </option>
+        <option value="barberingnvq2">Barbering [NVQ2] &#xf106 </option>
+        <option value="barberingnvq3">Barbering [NVQ3] &#xf106 </option>
+         <option value="hairnvq1">Hairdressing [NVQ1] &#xf106 </option>
+          <option value="hairnvq2">Hairdressing [NVQ2] &#xf106 </option>
+           <option value="hairnvq3">Hairdressing [NVQ3] &#xf106 </option>
+        <option value="stylingAndHairUp">Styling and Hair up &#xf106 </option>
+        <option value="salonManagement">Salon Management (All levels) &#xf106 </option>
+        <option value="shampooAndCondition">Shampooing and Conditioning &#xf106 </option>
+        <option value="cutting">Cutting &#xf106 </option>
+        <option value="colouring">Colouring &#xf106 </option>
+        <option value="perming">Perming &#xf106 </option>
+        <option value="consultation">Consultation &#xf106 </option>
+
+    </select>
+            <ul id="cont" data-refresh-ajax="true"></ul>
+            
+        </div>
+         
+        
+        <div class="panel" title="Favorites" id="video" data-footer="none" >
+            <header>
+                 <a href="#" onclick="$.ui.goBack();"  class="fa fa-chevron-left goback"></a>
+                <h1>Hairdressing Training</h1>
+                 <a href="#" onclick='if(meny.isOpen()){meny.close();}else{if(meny.isOpen()){meny.close();}else{meny.open();};};' class="fa fa-bars openmenu"></a>
+            </header>
+                    <a name="videoContainer"></a>
+                 <div id="videoContainer"></div>
+                 <div id="relatedvideos"></div>
+       <div id="share"></div>
+       </div>
+        
+        <div class="panel" title="About" id="about" data-footer="none"  data-transition="fade">
+            <header>
+                      <a href="#" onclick="$.ui.goBack();"  class="fa fa-chevron-left goback"></a>
+                <h1>About</h1>
+                 <a href="#" onclick='if(meny.isOpen()){meny.close();}else{meny.open();};' class="fa fa-bars openmenu"></a>
+            </header>
+            <div class="copy">
+            <p>Thank you for using the Hairdressing Training app.</p> 
+<p>The app has been developed to allow teachers; students; trainers or anyone with an interest in hairdressing and barbering skills access to step-by-step training videos on the move - all mapped to the NVQ curriculum. The video content has been produced by FE colleges to ensure accuracy.</p>
+            <p>The app is funded by <a href="#" onclick="openBrowser('http://www.jisc.ac.uk');">Jisc</a>, and developed by <a href="#" onclick="openBrowser('http://mimas.ac.uk');">Mimas</a> taking content from Mimas' award winning service - Hairdressing Training.</p>
+             <img src="72.png" alt="Hairdressing Training" /><img src="jisc.png" alt="Jisc" style="height:60px;margin-top:10px;"/>
+           
+    
+            </div>
+        </div>
+        
+        <div class="panel" title="Copyright" id="copyright" data-footer="none" >
+            <header>
+     <a href="#" onclick="$.ui.goBack();"  class="fa fa-chevron-left goback"></a>
+                <h1>Copyright</h1>
+                 <a href="#" onclick='if(meny.isOpen()){meny.close();}else{meny.open();};' class="fa fa-bars openmenu"></a>
+            </header>
+             <div class="copy">
+           <p>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 2.0 UK: England & Wales License.</p>
+             </div>
+        </div>
+        
+         <div class="panel" title="Help" id="help" data-footer="none"  >
+            <header>
+          <a href="#" onclick="$.ui.goBack();"  class="fa fa-chevron-left goback"></a>
+                <h1>Help</h1>
+                 <a href="#" onclick='if(meny.isOpen()){meny.close();}else{meny.open();};' class="fa fa-bars openmenu"></a>
+            </header>
+            <div class="copy">
+            <p>If you need help with this app, or If you have any comments on how we could develop the app further, please email us at <a href="#" onclick="openBrowser('mailto:hairdressing@mimas.ac.uk')">hairdressing@mimas.ac.uk</a> with HT APP in the title or call <tel>0161 275 6040</tel>. You can also access supporting worksheets and quizzes alongside the videos at: <a href="#" onclick="openBrowser('http://www.hairdressing.ac.uk')">http://www.hairdressing.ac.uk</a></p>
+            </div>
+        </div>
+        
+                
+          <div class="panel" title="My Playlist" id="playlist" data-footer="none" >
+            <header>
+    <a href="#" onclick="$.ui.goBack();"  class="fa fa-chevron-left goback"></a>
+                <h1>My Playlist</h1>
+                 <a href="#" onclick='if(meny.isOpen()){meny.close();}else{meny.open();};' class="fa fa-bars openmenu"></a>
+            </header>
+            <div id="playlistvideos"></div>
+<button width="100%" style="width:95%;margin-left:2.5%;margin-right:2.5%;margin-top:10px;" id="clear" class="interact" onClick="clearPlaylist();">Clear playlist</button>
+        </div>
+   
+    </div>
+</div>
+<script>
+var meny = Meny.create(
+{
+  menuElement: document.querySelector('#meny'),
+  contentsElement: document.querySelector('#content'),
+  position: 'right',
+  height: 200,
+  width: 250,
+  angle: 0,
+  // The mouse distance from menu position which can trigger menu to open.
+  threshold: 0,
+  // Width(in px) of the thin line you see on screen when menu is in closed position.
+  overlap:0,
+  // The total time taken by menu animation.
+  transitionDuration: '0.7s',
+  // Transition style for menu animations
+  transitionEasing: 'ease',
+  // Gradient overlay for the contents
+  gradient: false,
+  // Use mouse movement to automatically open/close
+  mouse: false,
+  // Use touch swipe events to open/close
+  touch: false
+});
+</script>
+</body>
+</html>    
