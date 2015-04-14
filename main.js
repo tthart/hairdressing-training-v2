@@ -17,6 +17,11 @@ var barberingnvq3 = 'http://gdata.youtube.com/feeds/api/playlists/PLKCjJUw4TaY3n
 var relatedvideos = '';
 var videoList = "#cont";
 var relatedvideoList = "#relatedvideos";
+var connectionStatus = false;
+
+document.addEventListener("offline", function(){ alert("Offline") }, false);
+document.addEventListener("online", function(){ alert("You're online") }, false);
+
 function openBrowser(address)
 {
 var ref = window.open(address, '_blank', 'toolbar=yes');
@@ -216,6 +221,11 @@ function secondsTimeSpanToHMS(s)
 
 function getVideo(e, playlist)
 {
+	
+	
+		  window.setTimeout(function() {
+				   $.ui.launch();
+			  },1500);
   var hash = e.id;
   var feed = 'http://gdata.youtube.com/feeds/api/videos/' + hash + '?v=2';
   var dataframe = '<iframe width="100%" height="180" src="http://www.youtube.com/embed/' + hash + '?controls=1&showinfo=0&color2=0xffffff&rel=0" frameborder="0" allowfullscreen></iframe>';
@@ -245,7 +255,8 @@ if(result > -1) string += '<div class="nvq">NVQ Level 1</div>';
       '<button class="interact" onclick="window.plugins.socialsharing.share(\'' + shortened + '\',\'' + data.data.title + '\');"><span class="fa fa-share-alt"></span> share</button>');
 	  
   });
-  
+
+		
   $.ui.updatePanel('#videoContainer', dataframe);
   //$('#videoContainer').html(dataframe);
 var playlistURL = 'http://gdata.youtube.com/feeds/api/videos/' + hash + '/related?author=MimasLandT&alt=json';
@@ -439,7 +450,7 @@ $.getJSON('http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8?v=2&a
 	$.ui.updatePanel('#cont',elements);	
 			  window.setTimeout(function() {
 				   $.ui.launch();
-			  },200);
+			  },1500);
 	
   });
 	
