@@ -64,7 +64,7 @@ function videoAdded()
 }
 
 $(document).ready(function() {
-	
+	clearPlaylist();
 	$("#categories").change(function()
   {
     var e = document.getElementById("categories");
@@ -272,6 +272,8 @@ function dbInsert(video, title, description, playlist) {
 	val3 = description;
 	val4 = playlist;
     var sqlTxt = "INSERT INTO PLAYLIST (video, title, description, playlist) VALUES (?, ?, ?, ?)";
+	console.log(val1, val2, val3, val4);
+	console.log(video, title, description, playlist);
     db.transaction(function(tx) {tx.executeSql(sqlTxt,[video, title, description, playlist])}, errorCB, successCB);
     }
 	
@@ -346,11 +348,11 @@ function querySuccess(tx, results)
   $('#playlistvideos').empty();
   for (var i = 0; i < len; i++)
   {
-	  
-    var video = results.rows.item(i).id;
-    var url = videoURL + results.rows.item(i).id;
-    var thumb = "http://img.youtube.com/vi/" + results.rows.item(i).id + "/mqdefault.jpg";
-    var feedTitle = results.rows.item(i).data;
+	  console.log(results.rows.item(i));
+    var video = results.rows.item(i).video;
+    var url = videoURL + results.rows.item(i).video;
+    var thumb = "http://img.youtube.com/vi/" + results.rows.item(i).video + "/mqdefault.jpg";
+    var feedTitle = results.rows.item(i).title;
 	var description = results.rows.item(i).description;
 	var playlist = results.rows.item(i).playlist;
 
