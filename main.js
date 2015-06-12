@@ -64,45 +64,39 @@ function videoAdded()
 }
 
 $(document).ready(function() {
-	//oAuth
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("POST","https://accounts.google.com/o/oauth2/device/code",true);
-xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xmlhttp.send("client_id=" + client_id + "&scope=https://gdata.youtube.com");
-	
 	
 	$("#categories").change(function()
   {
     var e = document.getElementById("categories");
     var strUser = e.options[e.selectedIndex].value;
     if (strUser == "cutting")
-      youtubegdata(cutting, 62, videoList);
+      getSelectedDropdownVideos(cutting, 62, videoList);
     if (strUser == "perming")
-      youtubegdata(perming, 62, videoList);
+      getSelectedDropdownVideos(perming, 62, videoList);
     if (strUser == "colouring")
-      youtubegdata(colouring, 62, videoList);
+      getSelectedDropdownVideos(colouring, 62, videoList);
     if (strUser == "consultation")
-      youtubegdata(consultation, 45, videoList);
+      getSelectedDropdownVideos(consultation, 45, videoList);
     if (strUser == "shampooAndCondition")
-      youtubegdata(shampooAndCondition, 45, videoList);
+      getSelectedDropdownVideos(shampooAndCondition, 45, videoList);
     if (strUser == "salonManagement")
-      youtubegdata(salonManagement, 45, videoList);
+      getSelectedDropdownVideos(salonManagement, 45, videoList);
     if (strUser == "stylingAndHairUp")
-      youtubegdata(stylingAndHairUp, 45, videoList);
+      getSelectedDropdownVideos(stylingAndHairUp, 45, videoList);
     if (strUser == "all")
   {  
   getAllVideos();
   }
     if (strUser == "hairnvq1")
-      youtubegdata(hairnvq1, 62, videoList);
+      getSelectedDropdownVideos(hairnvq1, 62, videoList);
     if (strUser == "hairnvq2")
-      youtubegdata(hairnvq2, 62, videoList);
+      getSelectedDropdownVideos(hairnvq2, 62, videoList);
     if (strUser == "hairnvq3")
-      youtubegdata(hairnvq3, 62, videoList);
+      getSelectedDropdownVideos(hairnvq3, 62, videoList);
     if (strUser == "barberingnvq2")
-      youtubegdata(barberingnvq2, 62, videoList);
+      getSelectedDropdownVideos(barberingnvq2, 62, videoList);
     if (strUser == "barberingnvq3")
-      youtubegdata(barberingnvq3, 62, videoList);
+      getSelectedDropdownVideos(barberingnvq3, 62, videoList);
 
   });
 });
@@ -116,7 +110,7 @@ $('body').click('#todoitems a', function()
 
 function getRelatedVideos(e)
 {
-	console.log(e);
+	console.log("Getting related videos action for: " + e);
   var limit = 5;
   var videos = e;
   var videoURL = 'http://www.youtube.com/watch?v=';
@@ -126,22 +120,15 @@ function getRelatedVideos(e)
 	var feedtitle = 'Related Videos';
     var list_data = "";
 	list_data += '<h3 class="related">' + feedtitle + '</h3>';
-    console.log(videos);
 	$.each(data.items, function(i, item)
     {
       var elem = $('span');
       var feedTitle = item.snippet.title;
-     // var feedURL = item.link[1].href;
-     // var fragments = feedURL.split("/");
-      var videoID = item.id.videoId;
-	  console.log(videoID);
+      var videoID = item.snippet.resourceId.videoId;
+	  var description = item.snippet.description;
       var url = videoURL + videoID;
       var thumb = item.snippet.thumbnails.medium.url;
-     // if (videoID != 'videos')
-    //  {
-        list_data += '<a  class="videolink" href="#" onClick="getVideo(this,\'' + e + '\');$.ui.scrollToTop(\'#video\');" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
-     // }
-	  console.log(item);
+        list_data += '<a  class="videolink" href="#" data-description="'+description+'" onClick="getVideo(this);$.ui.scrollToTop(\'#video\');" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
 	  
     });
 	
@@ -150,6 +137,232 @@ function getRelatedVideos(e)
   });
 }
 
+
+
+function getSelectedDropdownVideos(e, limit, variable)
+/**Function to update panel with list of videos frop dropdown list **/
+{
+	
+  var videoURL = 'http://www.youtube.com/watch?v=';
+
+
+  $.getJSON(e, function(data)
+  {
+    var list_data = "";
+    $.each(data.items, function(i, item)
+    {
+
+      var elem = $('span');
+      var feedTitle = item.snippet.title;
+	
+      var feedURL = "";
+      var videoID = item.snippet.resourceId.videoId;
+	  
+      var thumb = item.snippet.thumbnails.medium.url;
+var description = item.snippet.description;
+      if (videoID != 'videos')
+      {
+		  console.log(e);
+        list_data += '<a class="videolink" href="#" onClick="getVideo(this);" data-playlist="'+e+'" data-description="'+ description +'" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
+      }
+    });
+
+
+$.ui.updatePanel('#cont', list_data);	
+
+
+
+  });
+
+}
+
+
+
+function getVideo(e)
+{
+			  window.setTimeout(function() {
+				   $.ui.launch();
+			  },1500);
+			  
+		var duration = "";	  
+		var description = e.getAttribute('data-description');
+		
+		var playlist = e.getAttribute('data-playlist');
+		var string = '';
+		var title = e.title;
+		if(description){var result = description.search("Lv1");}
+		 var shortened = "http://y2u.be/" + hash;
+
+  var hash = e.id;
+//  var feed = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + playlist + '&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc';
+  var dataframe = '<iframe width="100%" height="180" src="http://www.youtube.com/embed/' + hash + '?controls=1&showinfo=0&color2=0xffffff&rel=0" frameborder="0" allowfullscreen></iframe>';
+  $.ui.updatePanel("#videoContainer",dataframe + '<div id="videoinformation"><h2 id="' + e.id + '" class="currentvideo">' + title + '</h2>'+
+       string +
+      '<p class="clear">' + description + '</p>'+
+      '<button class="interact" id="' + e.id + '" title="' + title + '" rel="#addtoplaylist"' +
+      'onclick="addVideoToPlaylist(\'' + hash + '\',\'' + title + '\',\'' + description + '\',\'' + playlist + '\');"><span class="fa fa-plus"> <span>playlist</span></button>' +
+      '<button class="interact" onclick="window.plugins.socialsharing.share(\'' + shortened + '\',\'' + title + '\');"><span class="fa fa-share-alt"></span> share</button></div>'
+
+
+);
+console.log("Getting related videos for: ");
+console.log(playlist);
+  //relatedvideofeed = allVideos;
+  getRelatedVideos(playlist);
+  $.ui.loadContent("#video", false, false, "fade");
+
+
+}
+
+
+
+
+
+
+function getAllVideos() {
+
+$.getJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLBBDD0C995715AAE8&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc&max-results=50', function(data)
+  {
+  
+    $.each(data.items, function(i, item)
+    {
+
+      var elem = $('span');
+      var feedTitle = item.snippet.title;
+	  var description = item.snippet.description;
+      var feedURL = "";//item.link[1].href;
+      var fragments = "";//feedURL.split("/");
+      var videoID = item.snippet.resourceId.videoId;
+      var url = "";//videoURL + videoID;
+      var thumb = item.snippet.thumbnails.medium.url;
+
+      if (videoID != 'videos')
+      {
+     elements = elements + '<a class="videolink" href="#" onClick="getVideo(this);" data-description="'+description+'" data-playlist="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLBBDD0C995715AAE8&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc&max-results=50" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
+      }
+	 $.ui.updatePanel('#cont',elements);	
+			 
+				   $.ui.launch();
+			 
+    }
+	
+	)
+	
+	
+  });
+	
+}
+
+//***************Database****************//
+
+function errorCB(err)
+{
+  console.log("Error processing SQL: " + err.code);
+}
+function successCB()
+{
+  var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
+  db.transaction(queryDB, errorCB);
+}
+
+function dbInsert(video, title, description, playlist) {
+	var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
+    val1 = video;
+    val2 = title;
+	val3 = description;
+	val4 = playlist;
+    var sqlTxt = "INSERT INTO PLAYLIST (video, title, description, playlist) VALUES (?, ?, ?, ?)";
+    db.transaction(function(tx) {tx.executeSql(sqlTxt,[video, title, description, playlist])}, errorCB, successCB);
+    }
+	
+	function dbDelete(id) {
+	var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
+    val1 = id;
+
+    var sqlTxt = "DELETE FROM PLAYLIST WHERE video = '"+id+"'";
+    db.transaction(function(tx) {tx.executeSql(sqlTxt)}, errorCB, successCB);
+    }
+	
+function clearPlaylist() {
+	var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
+	var sqlTxt = "DROP TABLE IF EXISTS PLAYLIST";
+	var sqlCreate = "CREATE TABLE IF NOT EXISTS PLAYLIST (video unique, title, description, playlist)"
+    db.transaction(function(tx) {tx.executeSql(sqlTxt);tx.executeSql(sqlCreate);}, errorCB, successCB);
+	
+    }
+
+function onDeviceReady()
+{
+  var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
+  db.transaction(populateDB, errorCB, successCB);
+}
+//Initialise database
+function populateDB(tx)
+{
+  tx.executeSql('CREATE TABLE IF NOT EXISTS PLAYLIST (video unique, title, description, playlist)');
+}
+
+//Add a video to the database
+function addVideoDB(tx, video, title, description, playlist)
+{
+  tx.executeSql('INSERT INTO PLAYLIST (video, title, description, playlist) VALUES ("' + video + '","' + title + '","'+description+'","'+playlist+'")');
+}
+
+// Query the database
+function queryDB(tx)
+{
+  tx.executeSql('SELECT * FROM PLAYLIST', [], querySuccess, errorCB);
+}
+//**Add video to the local device playlist**//
+function addVideoToPlaylist(video, title, description, playlist)
+{
+  $(document.body).popup(
+  {
+    title: "Add video",
+    message: '<p>Add this video to your playlist:</p><p class="title">' + title + '</p>',
+    cancelText: "Cancel",
+    doneText: "OK",
+    doneCallback: function()
+    {
+      console.log("Done for!");
+      dbInsert(video, title, description, playlist);
+    },
+    cancelCallback: function()
+    {
+      console.log("cancelled");
+    },
+    cancelOnly: false
+  });
+}
+
+// Query the success callback
+//
+function querySuccess(tx, results)
+{
+  var len = results.rows.length;
+  console.log("PLAYLIST table: " + len + " rows found.");
+  var list_data = '';
+  var videoURL = 'http://www.youtube.com/watch?v=';
+  $('#playlistvideos').empty();
+  for (var i = 0; i < len; i++)
+  {
+	  
+    var video = results.rows.item(i).id;
+    var url = videoURL + results.rows.item(i).id;
+    var thumb = "http://img.youtube.com/vi/" + results.rows.item(i).id + "/mqdefault.jpg";
+    var feedTitle = results.rows.item(i).data;
+	var description = results.rows.item(i).description;
+	var playlist = results.rows.item(i).playlist;
+
+list_data+=	'<a class="videolink" href="#" onClick="getVideo(this);");" id="' + video + '" title="' + feedTitle + '" data-description="'+description+'" data-playlist="'+playlist+'"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span></a><i id="' + video + '" class="fa fa-times removebutton removeFromPlaylist"  onClick="dbDelete(this.id);"></i><hr /></div>';
+  
+
+    console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+  }
+  list_data += '';
+  $.ui.updatePanel("#playlistvideos",list_data);
+
+}
 function getPlaylist()
 {
 
@@ -182,290 +395,7 @@ function getPlaylist()
 
   });
 }
-
-function youtubegdata(e, limit, variable)
-/**Function to update panel with list of videos frop dropdown list **/
-{
-	
-  var videoURL = 'http://www.youtube.com/watch?v=';
-
-
-  $.getJSON(e, function(data)
-  {
-    var list_data = "";
-    $.each(data.items, function(i, item)
-    {
-
-      var elem = $('span');
-      var feedTitle = item.snippet.title;
-	
-      var feedURL = "";
-      var videoID = item.snippet.resourceId.videoId;
-      var thumb = item.snippet.thumbnails.medium.url;
-var description = item.snippet.description;
-      if (videoID != 'videos')
-      {
-        list_data += '<a class="videolink" href="#" onClick="getVideo(this,\'' + e + '\');" data-description="'+ description +'" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
-      }
-    });
-
-
-$.ui.updatePanel('#cont', list_data);	
-
-
-
-  });
-
-}
-
-function secondsTimeSpanToHMS(s)
-  {
-    var h = Math.floor(s / 3600); //Get whole hours
-    s -= h * 3600;
-    var m = Math.floor(s / 60); //Get remaining minutes
-    s -= m * 60;
-    return (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s); //zero padding on minutes and seconds
-  }
-  //$(window).on('hashchange', function(e){
-
-function getVideo(e, playlist)
-{
-			  window.setTimeout(function() {
-				   $.ui.launch();
-			  },1500);
-/*	<h2 id="' + e.id + '" class="currentvideo">' + title + '</h2>'+
-      '<div class="label"><i class="fa fa-clock-o gr"></i> ' + length  + '</div>' + string  +
-      '<p class="clear">' + description + '</p>'+
-      '<button class="interact" id="' + e.id + '" title="' + title + '" rel="#addtoplaylist"' +
-      'onclick="addVideoToPlaylist(\'' + hash + '\',\'' + title + '\');"><span class="fa fa-plus"> <span>playlist</span></button>' +
-      '<button class="interact" onclick="window.plugins.socialsharing.share(\'' + shortened + '\',\'' + title + '\');"><span class="fa fa-share-alt"></span> share</button>');*/
-		var duration = "";	  
-		var description = e.getAttribute('data-description');
-		var string = '';
-		var title = e.title;
-		var result = description.search("Lv1");
-		 var shortened = "http://y2u.be/" + hash;
-if(result > -1) string += '<div class="nvq">NVQ Level 1</div>';
-	result = description.search("Lv2");
-	if(result > -1) string += '<div class="nvq">NVQ Level 2</div>';
-	result = description.search("/2");	
-	if(result > -1) string += '<div class="nvq">NVQ Level 2</div>';
-	result = description.search("Lv3");
-	if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
-	result = description.search("/3");
-	if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
-  var hash = e.id;
-  var feed = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + hash + '&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc';
-  var dataframe = '<iframe width="100%" height="180" src="http://www.youtube.com/embed/' + hash + '?controls=1&showinfo=0&color2=0xffffff&rel=0" frameborder="0" allowfullscreen></iframe>';
-  console.log(e);
-  $.ui.updatePanel("#videoContainer",dataframe + '<div id="videoinformation"><h2 id="' + e.id + '" class="currentvideo">' + title + '</h2>'+
-       string  +
-      '<p class="clear">' + description + '</p>'+
-      '<button class="interact" id="' + e.id + '" title="' + title + '" rel="#addtoplaylist"' +
-      'onclick="addVideoToPlaylist(\'' + hash + '\',\'' + title + '\');"><span class="fa fa-plus"> <span>playlist</span></button>' +
-      '<button class="interact" onclick="window.plugins.socialsharing.share(\'' + shortened + '\',\'' + title + '\');"><span class="fa fa-share-alt"></span> share</button></div>'
-
-
-);
-//www.googleapis.com/youtube/v3/videos?part=contentDetails&id=ta-PZGlwW_s&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fcc' + hash + '&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fcc', function(data, status, xhr) {
-	
-
-  //get rest of snippet for video
- /* $.getJSON('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + hash + '&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fcc', function(data, status, xhr)
-  {
-    
-	var description = data.items.snippet.description;
-	console.log("Test");
-	console.log(description);
-	var result = description.search("Lv1");
-	var title = data.items.title;
-	var length = "Test";
-	var string = '';
-if(result > -1) string += '<div class="nvq">NVQ Level 1</div>';
-	result = description.search("Lv2");
-	if(result > -1) string += '<div class="nvq">NVQ Level 2</div>';
-	result = description.search("/2");	
-	if(result > -1) string += '<div class="nvq">NVQ Level 2</div>';
-	result = description.search("Lv3");
-	if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
-	result = description.search("/3");
-	if(result > -1) string += '<div class="nvq">NVQ Level 3</div>';
-		 var shortened = "http://y2u.be/" + hash;
-			$.ui.updatePanel("#videoContainer",dataframe + '<div id="videoinformation">' +
-      '<h2 id="' + e.id + '" class="currentvideo">' + title + '</h2>'+
-      '<div class="label"><i class="fa fa-clock-o gr"></i> ' + length  + '</div>' + string  +
-      '<p class="clear">' + description + '</p>'+
-      '<button class="interact" id="' + e.id + '" title="' + title + '" rel="#addtoplaylist"' +
-      'onclick="addVideoToPlaylist(\'' + hash + '\',\'' + title + '\');"><span class="fa fa-plus"> <span>playlist</span></button>' +
-      '<button class="interact" onclick="window.plugins.socialsharing.share(\'' + shortened + '\',\'' + title + '\');"><span class="fa fa-share-alt"></span> share</button>');
-	  
-  });
-*/
-		
- // $.ui.updatePanel('#videoContainer', dataframe);
-  //$('#videoContainer').html(dataframe);
-var playlistURL = 'https://www.googleapis.com/youtube/v3/search?relatedToVideoId=' + hash + '&part=snippet&MaxResults=50&type=video&key='+key;
-  //relatedvideofeed = allVideos;
-  getRelatedVideos(playlistURL);
-
-  $.ui.loadContent("#video", false, false, "fade");
-
-
-}
-
-
-
-function addVideoToPlaylist(video, title)
-{
-  $(document.body).popup(
-  {
-    title: "Add video",
-    message: '<p>Add this video to your playlist:</p><p class="title">' + title + '</p>',
-    cancelText: "Cancel",
-    doneText: "OK",
-    doneCallback: function()
-    {
-      console.log("Done for!");
-      dbInsert(video, title);
-    },
-    cancelCallback: function()
-    {
-      console.log("cancelled");
-    },
-    cancelOnly: false
-  });
-}
-//Initialise database
-function populateDB(tx)
-{
-  tx.executeSql('CREATE TABLE IF NOT EXISTS PLAYLIST (id unique, data)');
-}
-
-//Add a video to the database
-function addVideoDB(tx, id, title)
-{
-  tx.executeSql('INSERT INTO PLAYLIST (id, data) VALUES ("' + id + '","' + title + '")');
-}
-
-// Query the database
-function queryDB(tx)
-{
-  tx.executeSql('SELECT * FROM PLAYLIST', [], querySuccess, errorCB);
-}
-
-// Query the success callback
-//
-function querySuccess(tx, results)
-{
-  var len = results.rows.length;
-  console.log("PLAYLIST table: " + len + " rows found.");
-  var list_data = '';
-  var videoURL = 'http://www.youtube.com/watch?v=';
-  $('#playlistvideos').empty();
-  for (var i = 0; i < len; i++)
-  {
-    var videoID = results.rows.item(i).id;
-    var url = videoURL + results.rows.item(i).id;
-    var thumb = "http://img.youtube.com/vi/" + results.rows.item(i).id + "/mqdefault.jpg";
-    var feedTitle = results.rows.item(i).data;
-
-list_data+=	'<a class="videolink" href="#" onClick="getVideo(this,\'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLKCjJUw4TaY1oKZ9-HBEFtqTUa1RtK9Wj&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc\');" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span></a><i id="' + videoID + '" class="fa fa-times removebutton removeFromPlaylist"  onClick="dbDelete(this.id);"></i><hr /></div>';
-  
-
-    console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
-  }
-  list_data += '';
-  $.ui.updatePanel("#playlistvideos",list_data);
-
-}
-
-// Transaction error callback
-//
-function errorCB(err)
-{
-  console.log("Error processing SQL: " + err.code);
-}
-
-// Transaction success callback
-//
-function successCB()
-{
-  var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
-  db.transaction(queryDB, errorCB);
-}
-
-function dbInsert(id,data) {
-	var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
-    val1 = id;
-    val2 = data;
-    var sqlTxt = "INSERT INTO PLAYLIST (id,data) VALUES (?, ?)";
-    db.transaction(function(tx) {tx.executeSql(sqlTxt,[id,data])}, errorCB, successCB);
-    }
-	
-	function dbDelete(id) {
-	var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
-    val1 = id;
-
-    var sqlTxt = "DELETE FROM PLAYLIST WHERE id = '"+id+"'";
-    db.transaction(function(tx) {tx.executeSql(sqlTxt)}, errorCB, successCB);
-    }
-	
-function clearPlaylist() {
-	var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
-	var sqlTxt = "DROP TABLE IF EXISTS PLAYLIST";
-	var sqlCreate = "CREATE TABLE IF NOT EXISTS PLAYLIST (id unique, data)"
-    db.transaction(function(tx) {tx.executeSql(sqlTxt);tx.executeSql(sqlCreate);}, errorCB, successCB);
-	
-    }
-
-function onDeviceReady()
-{
-  var db = window.openDatabase("Database", "1.0", "Playlist", 200000);
-  db.transaction(populateDB, errorCB, successCB);
-}
-
-function getAllVideos() {
-
-$.getJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLBBDD0C995715AAE8&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc&max-results=50', function(data)
-  {
-  
-    $.each(data.items, function(i, item)
-    {
-
-      var elem = $('span');
-      var feedTitle = item.snippet.title;
-	  var description = item.snippet.description;
-      var feedURL = "";//item.link[1].href;
-      var fragments = "";//feedURL.split("/");
-      var videoID = item.snippet.resourceId.videoId;//fragments[fragments.length - 2];
-      var url = "";//videoURL + videoID;
-      var thumb = item.snippet.thumbnails.medium.url;//"http://img.youtube.com/vi/" + videoID + "/mqdefault.jpg";
-
-      if (videoID != 'videos')
-      {
-     elements = elements + '<a class="videolink" href="#" onClick="getVideo(this,\'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLBBDD0C995715AAE8&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc&max-results=50\');" data-description="'+description+'" id="' + videoID + '" title="' + feedTitle + '"><div class="video"><img style="padding-top:5px;padding-bottom:5px;padding-left:5px;" alt="' + feedTitle + '" src="' + thumb + '" width="110"  /><span>' + feedTitle + '</span><i class="fa fa-chevron-right"></i><hr /></div></a>';
-      }
-	 
-    }
-	
-	)
-	$.ui.updatePanel('#cont',elements);	
-			  window.setTimeout(function() {
-				   $.ui.launch();
-			  },1500);
-	
-  });
-	
-
-}
-     function getAllVideos2() {    
-        initVideos();
-		
-		
-			  
-  
-	 }
-
+///*********************---Database----****************************//
 
 //+Menu
 var meny = Meny.create(
@@ -476,20 +406,23 @@ var meny = Meny.create(
   height: 200,
   width: 250,
   angle: 0,
-  // The mouse distance from menu position which can trigger menu to open.
   threshold: 0,
-  // Width(in px) of the thin line you see on screen when menu is in closed position.
   overlap:0,
-  // The total time taken by menu animation.
   transitionDuration: '0.7s',
-  // Transition style for menu animations
   transitionEasing: 'ease',
-  // Gradient overlay for the contents
   gradient: false,
-  // Use mouse movement to automatically open/close
   mouse: true,
-  // Use touch swipe events to open/close
   touch: false
 });
 
 /***************************************/
+
+function secondsTimeSpanToHMS(s)
+  {
+    var h = Math.floor(s / 3600); //Get whole hours
+    s -= h * 3600;
+    var m = Math.floor(s / 60); //Get remaining minutes
+    s -= m * 60;
+    return (m < 10 ? '0' + m : m) + ":" + (s < 10 ? '0' + s : s); //zero padding on minutes and seconds
+  }
+  //$(window).on('hashchange', function(e){
