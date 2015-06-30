@@ -4,7 +4,7 @@
     id              = "com.jisc.hairdressing"
     version         = "1.1">
     <name>Hairdressing Training</name>
-
+ <access origin="http://hairdressing.ac.uk/" browserOnly="true" />
     <description>
       This app has been developed to allow teachers; students; trainers or anyone with an interest in hairdressing and barbering skills access to step-by-step training videos on the move ­ all mapped to the NVQ curriculum. The video content has been produced by FE colleges to ensure accuracy. It has been developed by mimas.ac.uk, funded by jisc.ac.uk.
     </description>
