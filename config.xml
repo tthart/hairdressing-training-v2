@@ -8,7 +8,7 @@
 <access origin="www.googleapis.com" /> 
 <access origin="www.googleapis.com" /> 
 <access origin="fonts.googleapis.com" /> 
-<access origin="https://fonts.googleapis.com" /> 
+
 <access origin="www.youtube.com" /> 
 <access origin="http://y2u.be/" />
 <access origin="http://youtube.com" />
@@ -20,6 +20,9 @@
 <access origin="http://www.youtube.com/embed" />
 <access origin="https://i.ytimg.com" />
 <access origin="youtu.be" />
+<access origin="https://fonts.googleapis.com/css?family=Open+Sans" /> 
+<access origin="data:application/x-font-woff" />
+<access origin="https://www.googleapis.com/youtube/v3/" />
 
 <access origin="code.ionicframework.com" />
     <name>Hairdressing Training</name>
