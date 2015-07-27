@@ -3,20 +3,20 @@
     xmlns:android   = "http://schemas.android.com/apk/res/android"
     id              = "com.jisc.hairdressing"
     version         = "1.2">
-<access origin="maxcdn.bootstrapcdn.com" subdomains="true" /> 
-<access origin="www.googleapis.com" subdomains="true" /> 
-<access origin="www.googleapis.com" subdomains="true" /> 
-<access origin="fonts.googleapis.com" subdomains="true" /> 
-<access origin="www.youtube.com" subdomains="true" /> 
-<access origin="http://y2u.be/" subdomains="true" />
-<access origin="http://youtube.com" subdomains="true" />
-<access origin="http://www.youtube.com" subdomains="true" />
-<access origin="https://www.youtube.com" subdomains="true" />
-<access origin="http://www.youtube.com/embed" subdomains="true" />
-<access origin="https://i.ytimg.com" subdomains="true" />
-<access origin="youtu.be" subdomains="true" />
+<access origin="maxcdn.bootstrapcdn.com" /> 
+<access origin="www.googleapis.com" /> 
+<access origin="www.googleapis.com" /> 
+<access origin="fonts.googleapis.com" /> 
+<access origin="www.youtube.com" /> 
+<access origin="http://y2u.be/" />
+<access origin="http://youtube.com" />
+<access origin="http://www.youtube.com" />
+<access origin="https://www.youtube.com" />
+<access origin="http://www.youtube.com/embed" />
+<access origin="https://i.ytimg.com" />
+<access origin="youtu.be" />
 
-<access origin="code.ionicframework.com" subdomains="true" />
+<access origin="code.ionicframework.com" />
     <name>Hairdressing Training</name>
  <access origin="http://hairdressing.ac.uk/" browserOnly="true" />
     <description>
