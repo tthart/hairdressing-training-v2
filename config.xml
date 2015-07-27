@@ -8,7 +8,10 @@
     <description>
       This app has been developed to allow teachers; students; trainers or anyone with an interest in hairdressing and barbering skills access to step-by-step training videos on the move ­ all mapped to the NVQ curriculum. The video content has been produced by FE colleges to ensure accuracy. It has been developed by mimas.ac.uk, funded by jisc.ac.uk.
     </description>
-<access origin="*" /> 
+<access origin="http://maxcdn.bootstrapcdn.com" /> 
+<access origin="*.googleapis.com" /> 
+<access origin="http://code.ionicframework.com/" />
+
     <author href="https://hairdressing.ac.uk" email="tom.hart@manchester.ac.uk">
       Tom Hart
     </author>
