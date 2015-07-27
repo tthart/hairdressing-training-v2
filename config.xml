@@ -17,7 +17,7 @@
 <access origin="http://www.youtube.com/embed/" />
 <access origin="http://www.youtube.com" />
 <access origin="https://www.youtube.com" />
-<access origin="http://www.youtube.com/embed" />
+<access origin="https://www.youtube.com/embed/" />
 <access origin="https://i.ytimg.com" />
 <access origin="youtu.be" />
 <access origin="https://fonts.googleapis.com/css?family=Open+Sans" /> 
