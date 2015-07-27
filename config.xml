@@ -23,6 +23,7 @@
 <access origin="https://fonts.googleapis.com/css?family=Open+Sans" /> 
 <access origin="data:application/x-font-woff" />
 <access origin="https://www.googleapis.com/youtube/v3/" />
+<access origin="https://fonts.gstatic.com/" />
 
 <access origin="code.ionicframework.com" />
     <name>Hairdressing Training</name>
