@@ -8,6 +8,14 @@
 <access origin="www.googleapis.com" /> 
 <access origin="fonts.googleapis.com" /> 
 <access origin="www.youtube.com" /> 
+<access origin="http://y2u.be/" />
+<access origin="http://youtube.com" />
+<access origin="http://www.youtube.com" />
+<access origin="https://www.youtube.com" />
+<access origin="http://www.youtube.com/embed/" />
+<access origin="https://i.ytimg.com/vi/SxlkKefaFR0/mqdefault.jpg" />
+<access origin="https://youtu.be/" />
+
 <access origin="code.ionicframework.com" />
     <name>Hairdressing Training</name>
  <access origin="http://hairdressing.ac.uk/" browserOnly="true" />
