@@ -3,11 +3,7 @@
     xmlns:android   = "http://schemas.android.com/apk/res/android"
     id              = "com.jisc.hairdressing"
     version         = "1.2">
-<access origin="http://maxcdn.bootstrapcdn.com" /> 
-<access origin="https://www.googleapis.com" /> 
-<access origin="http://www.googleapis.com" /> 
-<access origin="http://fonts.googleapis.com" /> 
-<access origin="http://www.youtube.com" /> 
+
 
 <access origin="http://code.ionicframework.com/" />
     <name>Hairdressing Training</name>
