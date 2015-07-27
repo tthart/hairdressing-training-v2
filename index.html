@@ -25,7 +25,7 @@
     <script type="text/javascript" charset="utf-8" src="appframework/jquery.sidr.min.js"></script>
        <script type="text/javascript" src="main.js"> </script>
     <script>   
-        $.ui.autoLaunch = false;
+        $.ui.autoLaunch = true;
 		var elements = '';
 		var allVideos = 'http://gdata.youtube.com/feeds/api/playlists/PLBBDD0C995715AAE8&key=AIzaSyBtgBALWpVjsyXk_GgdKnmj1AxZRvG_1Fc&max-results=50';
 		var videoList = "#cont";
@@ -48,15 +48,7 @@
 </head>
 <body> 
 <div id="afui" class="android">
-<div id="splashscreen" class='ui-loader'>
-<br><br>
-<img src="48.png" /><br />
-<i class="fa fa-cog fa-spin" style="font-size:30pt;"></i><br />
-<p>Downloading list of videos</p>
-<small style="font-size:9pt;">This app requires an interenet connection</small>
-<br />
 
-</div>
 
      <ul id="meny">
               <li><a data-transition="fade" onClick="meny.close();" href="#main"  ><span class="fa fa-home"></span> Home</a></li>
