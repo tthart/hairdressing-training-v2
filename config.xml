@@ -3,11 +3,6 @@
     xmlns:android   = "http://schemas.android.com/apk/res/android"
     id              = "com.jisc.hairdressing"
     version         = "1.2">
-    <name>Hairdressing Training</name>
- <access origin="http://hairdressing.ac.uk/" browserOnly="true" />
-    <description>
-      This app has been developed to allow teachers; students; trainers or anyone with an interest in hairdressing and barbering skills access to step-by-step training videos on the move ­ all mapped to the NVQ curriculum. The video content has been produced by FE colleges to ensure accuracy. It has been developed by mimas.ac.uk, funded by jisc.ac.uk.
-    </description>
 <access origin="http://maxcdn.bootstrapcdn.com" /> 
 <access origin="https://www.googleapis.com" /> 
 <access origin="http://www.googleapis.com" /> 
@@ -15,6 +10,12 @@
 <access origin="http://www.youtube.com" /> 
 
 <access origin="http://code.ionicframework.com/" />
+    <name>Hairdressing Training</name>
+ <access origin="http://hairdressing.ac.uk/" browserOnly="true" />
+    <description>
+      This app has been developed to allow teachers; students; trainers or anyone with an interest in hairdressing and barbering skills access to step-by-step training videos on the move ­ all mapped to the NVQ curriculum. The video content has been produced by FE colleges to ensure accuracy. It has been developed by mimas.ac.uk, funded by jisc.ac.uk.
+    </description>
+
 
     <author href="https://hairdressing.ac.uk" email="tom.hart@manchester.ac.uk">
       Tom Hart
